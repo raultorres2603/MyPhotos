@@ -1,7 +1,7 @@
-package Classes;
+package classes;
 
 
-import Interfaces.IApp;
+import interfaces.IApp;
 import java.util.Scanner;
 
 public class App implements IApp {

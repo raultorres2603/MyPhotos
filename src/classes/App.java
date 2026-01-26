@@ -53,7 +53,7 @@ public class App implements IApp {
                     // Creates a new interface for MultimediaMenu to implement named IMultimediaMenu
                     // Create a new class of MultimediaMenu to handle this
                     // Creates a new MultimediaMenu and lists the files
-
+                    
                     break;
                 case 2:
                     System.out.println("You selected Option 2");

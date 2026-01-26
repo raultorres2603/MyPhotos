@@ -15,23 +15,31 @@ public class MultimediaMenu implements IMultimediaMenu {
         File[] listOfFiles = folder.listFiles();
 
         if (listOfFiles != null) {
-            for (File file : listOfFiles) {
-                if (file.isFile()) {
-                    System.out.println(file.getName());
+            for (int i = 0; i < listOfFiles.length; i++) {
+                if (fileIsPhoto(listOfFiles[i])) {
+                    System.out.println(i + ". " + listOfFiles[i].getName());
                 } 
             }
         }
-
     }
 
+    private boolean fileIsVideo(File file) {
+        String fileName = file.getName().toLowerCase();
+        return fileName.endsWith(".mp4") || fileName.endsWith(".avi") || fileName.endsWith(".mkv");
+    }
+
+    private boolean fileIsPhoto(File file) {
+        String fileName = file.getName().toLowerCase();
+        return fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".gif");
+    }
     public void listVideos() {
         File folder = new File(System.getProperty("user.home")+File.separator+"Videos");
         File[] listOfFiles = folder.listFiles();
 
         if (listOfFiles != null) {
-            for (File file : listOfFiles) {
-                if (file.isFile()) {
-                    System.out.println(file.getName());
+            for (int i = 0; i < listOfFiles.length; i++) {
+                if (fileIsVideo(listOfFiles[i])) {
+                    System.out.println(i + ". " + listOfFiles[i].getName());
                 }
             }
         }

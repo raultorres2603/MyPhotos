@@ -1,13 +1,15 @@
-package classes;
+package classes.menus;
 
 import java.io.File;
-import interfaces.IMultimediaMenu;
+import interfaces.menus.IMultimediaMenu;
 
 public class MultimediaMenu implements IMultimediaMenu {
     private final String name;
+    // TODO new property to handle if the user is on menu or not, by default OFF
 
-    private MultimediaMenu() {
+    public MultimediaMenu() {
         this.name = "MultimediaMenu";
+        // TODO Initialize property if the user is here or not by default to false
     }
 //C:/Users/amata/Documents
     public void listPhotos() {
@@ -46,6 +48,8 @@ public class MultimediaMenu implements IMultimediaMenu {
     }
 
     public void showMultimediaMenu() {
+        // TODO Handle the menu display
+        // If user is on menu, concurrent in time being here, menu display
         System.out.println("Welcome to " + this.name + ": Photos");
 
     };

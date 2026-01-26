@@ -1,4 +1,4 @@
-package interfaces;
+package interfaces.menus;
 
 public interface  IMultimediaMenu {
     void listPhotos();

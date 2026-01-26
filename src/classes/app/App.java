@@ -1,7 +1,8 @@
-package classes;
+package classes.app;
 
-
-import interfaces.IApp;
+import classes.menus.MultimediaMenu;
+import classes.menus.UploadMenu;
+import interfaces.app.IApp;
 import java.util.Scanner;
 
 public class App implements IApp {
@@ -9,9 +10,16 @@ public class App implements IApp {
     private final String name;
     private final Scanner userInput = new Scanner(System.in);
 
+    private final MultimediaMenu multimediaMenu;
+    private final UploadMenu uploadMenu;
+
+
+
     public App(String appName) {
         this.isOn = false;
         this.name = appName;
+        this.multimediaMenu = new MultimediaMenu();
+        this.uploadMenu = new UploadMenu();
     }
     /*
     public App() {
@@ -24,6 +32,10 @@ public class App implements IApp {
         return this.isOn;
     }
 
+    /**
+     * Sets the state of the app (on/off).
+     * @param state The desired state of the app.
+     */
     private void setIsOn(boolean state) {
         this.isOn = state;
         System.out.println("App " + this.name + " is now " + (this.isOn() ? "ON" : "OFF"));
@@ -49,17 +61,16 @@ public class App implements IApp {
             int userChoice = userInput.nextInt();
             switch (userChoice) {
                 case 1:
-                    System.out.println("You selected Option 1");
                     // Creates a new interface for MultimediaMenu to implement named IMultimediaMenu
                     // Create a new class of MultimediaMenu to handle this
                     // Creates a new MultimediaMenu and lists the files
-                    
+                    multimediaMenu.showMultimediaMenu();
                     break;
                 case 2:
-                    System.out.println("You selected Option 2");
                     // Creates a new interface for UploadMenu to implement named IUploadMenu
                     // Creates a new UploadMenu and then, will ask for file to upload
                     // Creates a new class of UploadMenu to handle this
+                    uploadMenu.showUploadMenu();
                     break;
                 case 3:
                     this.turnOff();
@@ -75,6 +86,13 @@ public class App implements IApp {
         setIsOn(false);
     }
 
+    private MultimediaMenu getMultimediaMenu() {
+        return multimediaMenu;
+    }
+
+    private UploadMenu getUploadMenu() {
+        return uploadMenu;
+    }
 }
 
 // App app = new App("MyPhotos");

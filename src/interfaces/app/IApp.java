@@ -1,4 +1,4 @@
-package interfaces;
+package interfaces.app;
 
 public interface IApp {
     void turnOn();

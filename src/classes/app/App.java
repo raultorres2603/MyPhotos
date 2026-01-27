@@ -40,7 +40,8 @@ public class App implements IApp {
         this.isOn = state;
         System.out.println("App " + this.name + " is now " + (this.isOn() ? "ON" : "OFF"));
     }
-
+    //no entiendo porque no me pide el @override
+    @Override
     public void turnOn() {
         System.out.println("Turning on the app: " + this.name);
         this.setIsOn(true);
@@ -50,7 +51,8 @@ public class App implements IApp {
     private String getName() {
         return this.name;
     }
-
+    //no entiendo porque no me pide el @override
+    @Override
     public void showPrincipalMenu() {
         System.out.println("Welcome to " + this.getName());
         System.out.println("Select an option:");
@@ -60,28 +62,22 @@ public class App implements IApp {
             System.out.println("3. Turn Off " + this.getName());
             int userChoice = userInput.nextInt();
             switch (userChoice) {
-                case 1:
-                    // Creates a new interface for MultimediaMenu to implement named IMultimediaMenu
+                case 1 -> // Creates a new interface for MultimediaMenu to implement named IMultimediaMenu
                     // Create a new class of MultimediaMenu to handle this
                     // Creates a new MultimediaMenu and lists the files
                     multimediaMenu.showMultimediaMenu();
-                    break;
-                case 2:
-                    // Creates a new interface for UploadMenu to implement named IUploadMenu
+                case 2 -> // Creates a new interface for UploadMenu to implement named IUploadMenu
                     // Creates a new UploadMenu and then, will ask for file to upload
                     // Creates a new class of UploadMenu to handle this
                     uploadMenu.showUploadMenu();
-                    break;
-                case 3:
-                    this.turnOff();
-                    break;
-                default:
-                    System.out.println("Invalid option. Please try again.");
+                case 3 -> this.turnOff();
+                default -> System.out.println("Invalid option. Please try again.");
             }
         }
 
     }
-
+    //no entiendo porque no me pide el @override
+    @Override
     public void turnOff() {
         setIsOn(false);
     }

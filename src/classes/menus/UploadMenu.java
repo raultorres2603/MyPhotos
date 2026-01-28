@@ -25,8 +25,8 @@ public class UploadMenu implements IUploadMenu {
 
    
     public void uploadPhotos() {
-        File folder = new File(System.getProperty("user.home")+File.separator+"Pictures");
-        File serverFolder = new File(System.getProperty("user.home")+File.separator+"MyPhotosServer"+File.separator+"UploadedPhotos");
+        File folder = new File(System.getProperty("user.home")+File.separator+"Pictures/");
+        File serverFolder = new File(System.getProperty("user.home")+File.separator+"MyPhotosServer"+File.separator+"UploadedPhotos/");
         if (!serverFolder.exists()) {
             System.out.println("El directorio del servidor no existe. Creando directorio...");
             try {
@@ -52,7 +52,7 @@ public class UploadMenu implements IUploadMenu {
             for (int i = 0; i < listOfFiles.length ; i++) {
                 String fileName = listOfFiles[i].getName().toLowerCase();
                 if (fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".gif")) {
-                    System.out.println((i+1) + listOfFiles[i].getName());
+                    System.out.println((i+1) + ". " + listOfFiles[i].getName());
                 }
             }
             int selectedPhoto = uInput.nextInt();

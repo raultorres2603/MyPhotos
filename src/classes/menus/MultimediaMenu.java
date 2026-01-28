@@ -23,9 +23,9 @@ public class MultimediaMenu implements IMultimediaMenu {
         File[] listOfFiles = folder.listFiles();
 
         if (listOfFiles != null) {
-            for (int i = 0; i < listOfFiles.length; i++) {
-                if (fileIsPhoto(listOfFiles[i])) {
-                    System.out.println(i + ". " + listOfFiles[i].getName());
+            for (int j = 0; j < listOfFiles.length; j++) {
+                if (fileIsPhoto(listOfFiles[j])) {
+                    System.out.println(j + ". " + listOfFiles[j].getName());
                 } 
             }
         }

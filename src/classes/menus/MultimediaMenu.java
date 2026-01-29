@@ -1,5 +1,6 @@
 package classes.menus;
 
+import classes.Utility.utilidades;
 import interfaces.menus.IMultimediaMenu;
 import java.io.File;
 import java.util.Scanner;
@@ -9,6 +10,7 @@ public class MultimediaMenu implements IMultimediaMenu {
     // TODO new property to handle if the user is on menu or not, by default OFF
     private boolean isOnMenu;
     private final Scanner userInput = new Scanner(System.in);
+    private final utilidades utilidades = new utilidades();
 
     public MultimediaMenu() {
         this.name = "MultimediaMenu";
@@ -24,22 +26,13 @@ public class MultimediaMenu implements IMultimediaMenu {
 
         if (listOfFiles != null) {
             for (int j = 0; j < listOfFiles.length; j++) {
-                if (fileIsPhoto(listOfFiles[j])) {
+                if (utilidades.fileIsPhoto(listOfFiles[j])) {
                     System.out.println(j + ". " + listOfFiles[j].getName());
                 } 
             }
         }
     }
 
-    private boolean fileIsVideo(File file) {
-        String fileName = file.getName().toLowerCase();
-        return fileName.endsWith(".mp4") || fileName.endsWith(".avi") || fileName.endsWith(".mkv");
-    }
-
-    private boolean fileIsPhoto(File file) {
-        String fileName = file.getName().toLowerCase();
-        return fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".gif");
-    }
     //no entiendo porque no me pide el @override
     @Override
     public void listVideos() {
@@ -48,7 +41,7 @@ public class MultimediaMenu implements IMultimediaMenu {
 
         if (listOfFiles != null) {
             for (int i = 0; i < listOfFiles.length; i++) {
-                if (fileIsVideo(listOfFiles[i])) {
+                if (utilidades.fileIsVideo(listOfFiles[i])) {
                     System.out.println(i + ". " + listOfFiles[i].getName());
                 }
             }

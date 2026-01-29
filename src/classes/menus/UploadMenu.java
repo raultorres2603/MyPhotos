@@ -1,11 +1,15 @@
 package classes.menus;
 
-import classes.Utility.utilidades;
+import classes.utility.Utilities;
 import interfaces.menus.IUploadMenu;
+import interfaces.utility.IUtility;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UploadMenu implements IUploadMenu {
@@ -15,7 +19,7 @@ public class UploadMenu implements IUploadMenu {
     private boolean isOnMenu;
 
     private final Scanner uInput = new Scanner(System.in);
-    private final utilidades utilidades = new utilidades();
+    private final IUtility utilidades = new Utilities();
 
     public UploadMenu() {
         this.name = "UploadMenu";
@@ -25,7 +29,7 @@ public class UploadMenu implements IUploadMenu {
     public void uploadPhotos() {
         File folder = new File(System.getProperty("user.home") + File.separator + "Pictures/");
         File serverFolder = new File(System.getProperty("user.home") + File.separator + "MyPhotosServer"
-                + File.separator + "UploadedPhotos/");
+                + File.separator + "UploadedPhotos" + File.separator);
         if (!serverFolder.exists()) {
             System.out.println("El directorio del servidor no existe. Creando directorio...");
             try {
@@ -42,26 +46,34 @@ public class UploadMenu implements IUploadMenu {
             }
         }
         File[] listOfFiles = folder.listFiles();
+
         if (listOfFiles == null) {
             System.out.println("No se encontraron archivos en el directorio de fotos.");
             return;
         }
+
+        List<File> photoFiles = new ArrayList<>();
+        for (File f : listOfFiles) {
+            if (utilidades.fileIsPhoto(f)) {
+                photoFiles.add(f);
+            }
+        }
+
         while (isOnMenu) {
             System.out.println("Elige la foto a subir:");
-            for (int i = 0; i < listOfFiles.length; i++) {
-                if (utilidades.fileIsPhoto(listOfFiles[i])) {
-                    System.out.println((i + 1) + ". " + listOfFiles[i].getName());
-                }
+            for (int i = 0; i < photoFiles.size(); i++) {
+                System.out.println((i + 1) + ". " + photoFiles.get(i).getName());
             }
             int selectedPhoto = uInput.nextInt();
             int photoIndex = selectedPhoto - 1;
-            if (photoIndex < 0 || photoIndex >= listOfFiles.length) {
+
+            if (photoIndex < 0 || photoIndex >= photoFiles.size()) {
                 System.out.println("Índice inválido. prueba de nuevo.");
                 continue;
             }
-            File photoToUpload = listOfFiles[photoIndex];
+            File photoToUpload = photoFiles.get(photoIndex);
             try {
-                Files.copy(photoToUpload.toPath(), serverFolder.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(photoToUpload.toPath(), serverFolder.toPath().resolve(photoToUpload.getName()), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("Foto subida exitosamente.");
             } catch (IOException e) {
                 System.out.println("Error al subir la foto: " + e.getMessage());
@@ -100,22 +112,28 @@ public class UploadMenu implements IUploadMenu {
             System.out.println("No se encontraron archivos en el directorio de videos.");
             return;
         }
+        List<File> videoFiles = new ArrayList<>();
+        for (File f : listOfFiles) {
+            if (utilidades.fileIsPhoto(f)) {
+                videoFiles.add(f);
+            }
+        }
         while (isOnMenu) {
             System.out.println("Elige el video a subir:");
-            for (int i = 0; i < listOfFiles.length; i++) {
-                if (utilidades.fileIsVideo(listOfFiles[i])) {
-                    System.out.println((i + 1) + ". " + listOfFiles[i].getName());
+            for (int i = 0; i < videoFiles.size(); i++) {
+                if (utilidades.fileIsVideo(videoFiles.get(i))) {
+                    System.out.println((i + 1) + ". " + videoFiles.get(i).getName());
                 }
             }
             int selectedVideo = uInput.nextInt();
             int videoIndex = selectedVideo - 1;
-            if (videoIndex < 0 || videoIndex >= listOfFiles.length) {
+            if (videoIndex < 0 || videoIndex >= videoFiles.size()) {
                 System.out.println("Índice inválido. prueba de nuevo.");
                 continue;
             }
-            File videoToUpload = listOfFiles[videoIndex];
+            File videoToUpload = videoFiles.get(videoIndex);
             try {
-                Files.copy(videoToUpload.toPath(), serverFolder.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(videoToUpload.toPath(), serverFolder.toPath().resolve(videoToUpload.getName()), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("Video subido exitosamente.");
             } catch (IOException e) {
                 System.out.println("Error al subir el video: " + e.getMessage());

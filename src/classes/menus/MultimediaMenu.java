@@ -1,7 +1,9 @@
 package classes.menus;
 
-import classes.Utility.utilidades;
+import classes.utility.Utilities;
 import interfaces.menus.IMultimediaMenu;
+import interfaces.utility.IUtility;
+
 import java.io.File;
 import java.util.Scanner;
 
@@ -10,7 +12,7 @@ public class MultimediaMenu implements IMultimediaMenu {
     // TODO new property to handle if the user is on menu or not, by default OFF
     private boolean isOnMenu;
     private final Scanner userInput = new Scanner(System.in);
-    private final utilidades utilidades = new utilidades();
+    private final IUtility utilidades = new Utilities();
 
     public MultimediaMenu() {
         this.name = "MultimediaMenu";
@@ -71,6 +73,6 @@ public class MultimediaMenu implements IMultimediaMenu {
              }
         }
 
-    };
+    }
 
 }

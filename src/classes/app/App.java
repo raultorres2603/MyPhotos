@@ -4,7 +4,8 @@ import classes.menus.MultimediaMenu;
 import classes.menus.UploadMenu;
 import interfaces.app.IApp;
 import java.util.Scanner;
-
+ //Optimizar codigo, tanto en videos como en fotos. Automatizar y crear un metodo generico que dependiendo del tipo
+    //de archivo haga una cosa u otra, en temas como el path, el folder del servidor, subir archivo.
 public class App implements IApp {
     private boolean isOn;
     private final String name;

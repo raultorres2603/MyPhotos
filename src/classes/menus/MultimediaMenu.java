@@ -3,7 +3,6 @@ package classes.menus;
 import classes.utility.Utilities;
 import interfaces.menus.IMultimediaMenu;
 import interfaces.utility.IUtility;
-
 import java.io.File;
 import java.util.Scanner;
 
@@ -16,40 +15,43 @@ public class MultimediaMenu implements IMultimediaMenu {
 
     public MultimediaMenu() {
         this.name = "MultimediaMenu";
-        // TODO Initialize property if the user is here or not by default to false
+     
         this.isOnMenu = false;
     }
-//C:/Users/amata/Documents
-//no entiendo porque no me pide el @override
-    @Override
-    public void listPhotos() {
-        File folder = new File(System.getProperty("user.home")+File.separator+"Pictures");
-        File[] listOfFiles = folder.listFiles();
 
-        if (listOfFiles != null) {
-            for (int j = 0; j < listOfFiles.length; j++) {
-                if (utilidades.fileIsPhoto(listOfFiles[j])) {
-                    System.out.println(j + ". " + listOfFiles[j].getName());
-                } 
-            }
+     private void listThings(String type) {
+        File folder;
+        if (type.contains("photo")) {
+            folder = new File(System.getProperty("user.home") + File.separator + "Pictures");
+        } else if (type.contains("video")) {
+            folder = new File(System.getProperty("user.home") + File.separator + "Videos");
+        } else {
+            System.out.println("Tipo no reconocido: " + type);
+            return;
         }
-    }
 
-    //no entiendo porque no me pide el @override
-    @Override
-    public void listVideos() {
-        File folder = new File(System.getProperty("user.home")+File.separator+"Videos");
         File[] listOfFiles = folder.listFiles();
-
         if (listOfFiles != null) {
             for (int i = 0; i < listOfFiles.length; i++) {
-                if (utilidades.fileIsVideo(listOfFiles[i])) {
+                boolean isValid = type.contains("photo") ? utilidades.fileIsPhoto(listOfFiles[i]) : utilidades.fileIsVideo(listOfFiles[i]);
+                
+                if (isValid) {
                     System.out.println(i + ". " + listOfFiles[i].getName());
                 }
             }
         }
+        
+    }  
+     @Override
+    public void listPhotos() {
+        listThings("photograph");
     }
-    //no entiendo porque no me pide el @override
+    
+    @Override
+    public void listVideos() {
+       listThings("videograph");
+    }
+
     @Override
     public void showMultimediaMenu() {
         // TODO Handle the menu display

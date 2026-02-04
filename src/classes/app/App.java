@@ -1,5 +1,6 @@
 package classes.app;
 
+import classes.config.ConfigService;
 import classes.menus.MultimediaMenu;
 import classes.menus.UploadMenu;
 import interfaces.app.IApp;
@@ -13,6 +14,8 @@ public class App implements IApp {
 
     private final MultimediaMenu multimediaMenu;
     private final UploadMenu uploadMenu;
+
+    private final ConfigService configService = new ConfigService();
 
 
 
